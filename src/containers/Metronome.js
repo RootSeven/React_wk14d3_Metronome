@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Metronome.css';
 
 class Metronome extends Component {
 
@@ -43,6 +44,14 @@ class Metronome extends Component {
         snd.play();
     }
 
+    buttonText = () => {
+        if (this.state.playing) {
+            return "Stop";
+        } else {
+            return "Start";
+        }
+    }
+
     render(){
         return(
             <div className="metronome">
@@ -56,7 +65,7 @@ class Metronome extends Component {
                     onChange={this.handleChangeBPM}
                     />
 
-                    <button onClick={this.handleStartStop}>Start/Stop</button>
+        <button className={this.state.playing.toString()} onClick={this.handleStartStop}>{this.buttonText()}</button>
                 </div>
             </div>
         )
