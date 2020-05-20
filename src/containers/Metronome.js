@@ -13,20 +13,29 @@ class Metronome extends Component {
     handleChangeBPM = (event) => {
         let newBpm = event.target.value;
         this.setState({bpm: newBpm});
+
+        if (this.state.playing){
+            this.playBeep();
+        }
     }
 
     handleStartStop = () => {
         if (this.state.playing){
-            clearInterval(this.timer);
             this.setState({
                 playing: false
-            });
+            })
+            clearInterval(this.timer);
         } else {
-            this.timer = setInterval(this.beep ,(60/this.state.bpm) * 1000 );
             this.setState({
                 playing: true
-            }, this.beep);
+            })
+            this.playBeep();
         }
+    }
+
+    playBeep = () => {
+        clearInterval(this.timer);
+        this.timer = setInterval(this.beep, (60/this.state.bpm) * 1000);
     }
 
     beep = () => {
